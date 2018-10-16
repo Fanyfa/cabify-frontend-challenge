@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import cabifyLogo from './images/cabify-logo.svg';
 import './styles/App.css';
+import Select from './components/Select';
+
+const tempOptions = [
+  "+34 Spain",
+  "+56 Chile",
+  "51 Perú",
+  "521 México",
+];
 
 class App extends Component {
   render() {
@@ -49,8 +57,8 @@ class App extends Component {
               </div>
             </div>
             <div className="row row-separationMedium row-gutterMedium">
-              <div className="col col3">
-                {/* select field will be placed here */}
+              <div className="formField-input col col3">
+                <Select options={tempOptions} />
               </div>
               <div className="formField-input col col9">
                 <div className="input">

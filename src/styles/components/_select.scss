@@ -1,0 +1,8 @@
+.select {
+  .select__list {
+
+    &.select__list--hidden {
+      display: none;
+    }
+  }
+}
