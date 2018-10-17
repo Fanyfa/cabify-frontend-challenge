@@ -2,13 +2,28 @@ import React, { Component } from 'react';
 import cabifyLogo from './images/cabify-logo.svg';
 import './styles/App.css';
 import Select from './components/Select';
+import Input from './components/Input';
+
 
 const tempOptions = [
-  "+34 Spain",
-  "+56 Chile",
-  "51 Perú",
-  "521 México",
+  {
+    name: 'Spain',
+    prefix: '+34'
+  },
+  {
+    name: 'Chile',
+    prefix: '+56'
+  },
+  {
+    name: 'Perú',
+    prefix: '+51'
+  },
+  {
+    name: 'México',
+    prefix: '+521'
+  }
 ];
+
 
 class App extends Component {
   render() {
@@ -40,56 +55,64 @@ class App extends Component {
         <article className="builder col col6">
           <form className="form" action="">
             <div className="row">
-              <div className="formField-input active col col12">
-                <div className="input">
-                  <input type="text" name="fullname" value="Laura Sánchez" />
-                  <label htmlFor="fullname">Full name</label>
-                </div>
-              </div>
+              <Input 
+                className="col12"
+                type="text" 
+                name="fullname" 
+                value="Laura Sánchez"
+                label="Full name"
+              />
             </div>
             <div className="row row-separationMedium">
               {/* you probably need to add active/focus/disabled classNames */}
-              <div className="formField-input active focus col col12">
-                <div className="input">
-                  <input type="text" name="jobdescription" value="Fronte" />
-                  <label htmlFor="jobdescription">Job description</label>
-                </div>
-              </div>
+              <Input 
+                className="col12"
+                type="text" 
+                name="jobdescription" 
+                value="Fronted"
+                label="Job description"
+              />
             </div>
             <div className="row row-separationMedium row-gutterMedium">
               <div className="formField-input col col3">
-                <Select options={tempOptions} />
+                <Select 
+                  options={tempOptions}
+                  name="prefix"
+                  label="Prefix"
+                />
               </div>
-              <div className="formField-input col col9">
-                <div className="input">
-                  <input type="tel" name="ponenumber" />
-                  <label htmlFor="ponenumber">Phone number</label>
-                </div>
-              </div>
+              <Input 
+                className="col9"
+                type="tel" 
+                name="ponenumber" 
+                label="Phone number"
+              />
             </div>
             <div className="row row-separationMedium">
-              <div className="formField-input col col12">
-                <div className="input">
-                  <input type="email" name="email" />
-                  <label htmlFor="email">Email</label>
-                </div>
-              </div>
+              <Input 
+                className="col12"
+                type="email" 
+                name="email" 
+                label="Email"
+              />
             </div>
             <div className="row row-separationMedium">
-              <div className="formField-input active disabled col col12">
-                <div className="input">
-                  <input type="text" name="website" value="www.cabify.com" />
-                  <label htmlFor="website">Website</label>
-                </div>
-              </div>
+              <Input 
+                className="col12"
+                type="text" 
+                name="website" 
+                value="www.cabify.com"
+                label="Website"
+              />
             </div>
             <div className="row row-separationMedium">
-              <div className="formField-input active col col12">
-                <div className="input">
-                  <input type="text" name="address" value="Calle Pradillo 42. CP: 28002. Madrid" />
-                  <label htmlFor="address">Address</label>
-                </div>
-              </div>
+              <Input 
+                className="col12"
+                type="text" 
+                name="address" 
+                value="Calle Pradillo 42. CP: 28002. Madrid"
+                label="Address"
+              />
             </div>
             <div className="row row-separationHuge">
               <input className="button button-full button-primary disabled" type="submit" value="Request" />

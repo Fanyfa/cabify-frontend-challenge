@@ -452,8 +452,26 @@ input:-webkit-autofill {
     display: block;
     width: 100%; }
 
-.select .select__list.select__list--hidden {
-  display: none; }
+.select {
+  position: relative;
+  cursor: pointer; }
+  .select .select__list {
+    position: absolute;
+    width: 240px;
+    height: 192px;
+    box-shadow: 0px 0px 15px -5px;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: white;
+    z-index: 1; }
+    .select .select__list.select__list--hidden {
+      display: none; }
+    .select .select__list .select__list__element {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 10px 10px 10px; }
+      .select .select__list .select__list__element .select__list__prefix {
+        color: grey; }
 
 .title-main {
   font-size: 36px;
