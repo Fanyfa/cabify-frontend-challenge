@@ -1,10 +1,12 @@
 import React, {Component} from "react";
+import { withAppContext } from '../providers/App';
 
 class Select extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visibleList: false
+      visibleList: false,
+      value: ''
     };
     this.handleClick = this.handleClick.bind(this);
   };
@@ -16,21 +18,35 @@ class Select extends Component {
     });
   }
 
+  handleItemClick(value) {
+    const { context, name } = this.props;
+    this.setState({
+      visibleList: false,
+      value
+    });
+    context.setFormData(name, value);
+  }
+
   render() {
-    const { visibleList } = this.state;
-    const { options, name, label } = this.props;
+    const { visibleList, value } = this.state;
+    const { data, name, label, className } = this.props;
     return (
-      <div className="select">
-        <div className="input">
-          <input type="text" name={name} onClick={this.handleClick}/>
+      <div className={`select formField-input col ${className} ${value !== '' ? 'active' : ''}`}>
+        <div className="input" onClick={this.handleClick}>
+          <input type="text" name={name} value={value}/>
           <label htmlFor={name}>{label}</label>
-        </div>'
+        </div>
         <ul className={`select__list ${visibleList === false ? 'select__list--hidden' : ''}`}>
-          {options.map(option => {
-            return <li className="select__list__element">
-              <span className="select__list__name">{option.name}</span> 
-              <span className="select__list__prefix">{option.prefix}</span>
-            </li>;
+          {data.map(item => {
+            return (
+              <li className="select__list__element" onClick={() => this.handleItemClick(item.dial_code)}>
+                <span className="select__list__name">
+                  <img src={require(`../images/flags/${item.code}.svg`)} />
+                  {item.name}
+                </span> 
+                <span className="select__list__prefix">{item.dial_code}</span>
+              </li>
+            );
           })}
         </ul>
       </div>
@@ -38,4 +54,4 @@ class Select extends Component {
   }
 }
 
-export default Select;
+export default withAppContext(Select);

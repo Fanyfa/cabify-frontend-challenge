@@ -457,21 +457,23 @@ input:-webkit-autofill {
   cursor: pointer; }
   .select .select__list {
     position: absolute;
+    top: 41px;
     width: 240px;
     height: 192px;
     box-shadow: 0px 0px 15px -5px;
     border-radius: 5px;
     font-size: 14px;
-    background-color: white;
-    z-index: 1; }
+    background-color: #FFFFFF;
+    z-index: 1;
+    overflow: scroll; }
     .select .select__list.select__list--hidden {
       display: none; }
     .select .select__list .select__list__element {
       display: flex;
       justify-content: space-between;
-      padding: 10px 10px 10px 10px; }
+      padding: 10px; }
       .select .select__list .select__list__element .select__list__prefix {
-        color: grey; }
+        color: #717285; }
 
 .title-main {
   font-size: 36px;
