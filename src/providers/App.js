@@ -13,7 +13,8 @@ class AppProvider extends Component {
       email: '',
       website: '',
       address: '',
-      setFormData: this.setFormData
+      setFormData: this.setFormData,
+      getIfFormFullFilled: this.getIfFormFullFilled
     };
   };
 
@@ -22,6 +23,17 @@ class AppProvider extends Component {
       [name]: value
     });
   };
+
+  getIfFormFullFilled = () => {
+    const { fullname, jobdescription, prefix, phonenumber, email, website, address } = this.state;
+    return fullname !== '' && 
+    jobdescription !== '' && 
+    prefix !== '' && 
+    phonenumber !== '' && 
+    email !== '' && 
+    website !== '' && 
+    address !== '' ? true : false;
+  }
 
   render() {
     const { children } = this.props; 

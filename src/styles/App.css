@@ -455,6 +455,14 @@ input:-webkit-autofill {
 .select {
   position: relative;
   cursor: pointer; }
+  .select .input {
+    position: relative; }
+    .select .input .input__iconArrow {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto; }
   .select .select__list {
     position: absolute;
     top: 41px;
@@ -471,7 +479,8 @@ input:-webkit-autofill {
     .select .select__list .select__list__element {
       display: flex;
       justify-content: space-between;
-      padding: 10px; }
+      padding: 10px;
+      height: 32px; }
       .select .select__list .select__list__element .select__list__prefix {
         color: #717285; }
 

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import { withAppContext } from '../providers/App';
+import iconArrow from '../images/arrow.svg';
 
 class Select extends Component {
   constructor(props) {
@@ -8,17 +9,16 @@ class Select extends Component {
       visibleList: false,
       value: ''
     };
-    this.handleClick = this.handleClick.bind(this);
   };
 
-  handleClick() {
+  handleClick = () => {
     const { visibleList } = this.state;
     this.setState({
       visibleList: !visibleList
     });
   }
 
-  handleItemClick(value) {
+  handleItemClick = (value) => {
     const { context, name } = this.props;
     this.setState({
       visibleList: false,
@@ -33,10 +33,12 @@ class Select extends Component {
     return (
       <div className={`select formField-input col ${className} ${value !== '' ? 'active' : ''}`}>
         <div className="input" onClick={this.handleClick}>
-          <input type="text" name={name} value={value}/>
+          <input type="text" name={name} value={value} readOnly/>
+          <img src={iconArrow} className="input__iconArrow"/>
           <label htmlFor={name}>{label}</label>
         </div>
         <ul className={`select__list ${visibleList === false ? 'select__list--hidden' : ''}`}>
+          <li className="select__list__element" onClick={() => this.handleItemClick('')}></li>
           {data.map(item => {
             return (
               <li className="select__list__element" onClick={() => this.handleItemClick(item.dial_code)}>

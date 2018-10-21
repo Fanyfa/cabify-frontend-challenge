@@ -5,10 +5,19 @@ import Select from './components/Select';
 import Input from './components/Input';
 import prefixes from './data/Prefixes';
 import BusinessCard from './components/BusinessCard';
-
+import { withAppContext } from './providers/App'
+import { sendFormData } from './services/formapi';
 
 class App extends Component {
+
+  handleOnSubmit = (event) => {
+    event.preventDefault();
+    const { fullname, jobdescription, prefix, phonenumber, email, website, address } = this.props.context;
+    sendFormData({ fullname, jobdescription, prefix, phonenumber, email, website, address });
+  }
+
   render() {
+    const { context } = this.props;
     return (
       <div className="mainWrapper row">
         <article className="businessCard col col6">
@@ -34,7 +43,6 @@ class App extends Component {
               />
             </div>
             <div className="row row-separationMedium">
-              {/* you probably need to add active/focus/disabled classNames */}
               <Input 
                 className="col12"
                 type="text" 
@@ -81,7 +89,11 @@ class App extends Component {
               />
             </div>
             <div className="row row-separationHuge">
-              <input className="button button-full button-primary disabled" type="submit" value="Request" />
+              <input className={`button button-full button-primary ${context.getIfFormFullFilled() === false ? 'disabled' : ''}`} 
+                type="submit" 
+                value="Request"
+                onClick={this.handleOnSubmit}
+              />
             </div>
           </form>
         </article>
@@ -90,5 +102,4 @@ class App extends Component {
   }
 }
 
-export default App;
-
+export default withAppContext(App);
