@@ -11,7 +11,7 @@ class AppProvider extends Component {
       prefix: '',
       phonenumber: '',
       email: '',
-      website: '',
+      website: 'www.cabify.com',
       address: '',
       setFormData: this.setFormData,
       getIfFormFullFilled: this.getIfFormFullFilled

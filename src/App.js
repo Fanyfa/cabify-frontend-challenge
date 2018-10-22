@@ -78,6 +78,8 @@ class App extends Component {
                 type="text" 
                 name="website" 
                 label="Website"
+                value="www.cabify.com"
+                isDisabled={true}
               />
             </div>
             <div className="row row-separationMedium">

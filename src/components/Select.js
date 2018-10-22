@@ -38,15 +38,17 @@ class Select extends Component {
           <label htmlFor={name}>{label}</label>
         </div>
         <ul className={`select__list ${visibleList === false ? 'select__list--hidden' : ''}`}>
-          <li className="select__list__element" onClick={() => this.handleItemClick('')}></li>
-          {data.map(item => {
+          <li className="select__list__element" onClick={() => this.handleItemClick('')}>Empty Option</li>
+          {data.map((item, i) => {
             return (
-              <li className="select__list__element" onClick={() => this.handleItemClick(item.dial_code)}>
-                <span className="select__list__name">
-                  <img src={require(`../images/flags/${item.code}.svg`)} />
-                  {item.name}
-                </span> 
-                <span className="select__list__prefix">{item.dial_code}</span>
+              <li key={i} className="select__list__element" onClick={() => this.handleItemClick(item.dial_code)}>
+                <div className="select__list__nameContainer">
+                  <div className="select__list__image" style={{ backgroundImage: `url('${require(`../images/flags/${item.code}.svg`)}')`}}></div>
+                  <span className="select__list__name">
+                    {item.name}
+                  </span> 
+                </div>
+                <div className="select__list__prefix">{item.dial_code}</div>
               </li>
             );
           })}

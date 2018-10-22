@@ -6,7 +6,8 @@ class Input extends Component {
     super(props);
     this.state = {
       value: '',
-      isActive: false
+      isActive: false,
+      isFocus: false
     };
   };
 
@@ -21,21 +22,32 @@ class Input extends Component {
 
   handleOnFocus = () => {
     this.setState({
-      isActive: true
+      isActive: true,
+      isFocus: true
     });
   }
 
   handleOnBlur = () => {
     this.setState({
-      isActive: this.state.value !== '' ? true : false
+      isActive: this.state.value !== '' ? true : false,
+      isFocus: false
     });
   }
 
+  getClassName = () => {
+    const { className, isDisabled } = this.props;
+    const { isActive, isFocus } = this.state;
+    return `formField-input col 
+      ${className} 
+      ${isActive ? 'active' : ''}
+      ${isDisabled ? 'disabled active' : ''}
+      ${isFocus ? 'focus' : ''}`;
+  }
+
   render() {
-    const { className, type, name, value, label } = this.props;
-    const { isActive } = this.state;
+    const { type, name, value, label } = this.props;
     return (
-      <div className={`formField-input col ${className} ${isActive ? 'active' : ''}`}>
+      <div className={this.getClassName()}>
         <div className="input">
           <input type={type} name={name} value={value} 
           onChange={this.handleOnChange}
