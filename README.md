@@ -1,3 +1,6 @@
+This is my coding challenge for a Front-End opportunity at Cabify. These are the requirements of the challenge:
+
+```
 # Cabify Frontend-UI challenge
 For the coding challenge you have to create a business card builder in React. You'll be given some custom premade CSS, an HTML markup (which you can modify) and a React application created with facebook's create-react-app.
 To complete the challenge you need to create a form in react with the given HTML. You'll need to finish the following features in this order:
@@ -26,12 +29,15 @@ To complete the challenge you need to create a form in react with the given HTML
 * You can modify the HTML at will
 * If you decide to use flags to enhance the select component you can get them from [here](https://github.com/madebybowtie/FlagKit)
 ## Running the app
-```
+
 yarn
 yarn watch-css
 yarn start
-```
+
 Now you can visit `localhost:3000` from your browser.
 ## Design files
 * [Download the .sketch file](Frontend-challenge.sketch)
 * [Download the .pdf file](Frontend-challenge.pdf)
+```
+
+** I've decided to implement the state with Context API.
