@@ -403,9 +403,20 @@ input:-webkit-autofill {
     .formField-input.disabled .input input {
       color: #A7A7B3;
       cursor: not-allowed; }
+  .formField-input.error {
+    border-color: #FC5959; }
+    .formField-input.error .input .warning {
+      display: block; }
   .formField-input .input {
     flex: 1 1 100%;
     position: relative; }
+    .formField-input .input .warning {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto; }
     .formField-input .input label {
       color: #717285;
       font-size: 11px;

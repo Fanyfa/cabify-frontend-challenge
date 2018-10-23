@@ -7,13 +7,19 @@ import prefixes from './data/Prefixes';
 import BusinessCard from './components/BusinessCard';
 import { withAppContext } from './providers/App'
 import { sendFormData } from './services/formapi';
+import { isEmailValid } from './utils/form';
 
 class App extends Component {
 
   handleOnSubmit = (event) => {
     event.preventDefault();
-    const { fullname, jobdescription, prefix, phonenumber, email, website, address } = this.props.context;
-    sendFormData({ fullname, jobdescription, prefix, phonenumber, email, website, address });
+    const { fullname, jobdescription, prefix, phonenumber, email, website, address, setEmailError } = this.props.context;
+    if (isEmailValid(email)) {
+      sendFormData({ fullname, jobdescription, prefix, phonenumber, email, website, address });
+      setEmailError(false);
+    } else {
+      setEmailError(true);
+    }
   }
 
   render() {
@@ -70,6 +76,7 @@ class App extends Component {
                 type="email" 
                 name="email" 
                 label="Email"
+                isError={context.emailError}
               />
             </div>
             <div className="row row-separationMedium">

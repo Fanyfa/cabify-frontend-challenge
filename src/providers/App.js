@@ -13,8 +13,10 @@ class AppProvider extends Component {
       email: '',
       website: 'www.cabify.com',
       address: '',
+      emailError: false,
       setFormData: this.setFormData,
-      getIfFormFullFilled: this.getIfFormFullFilled
+      getIfFormFullFilled: this.getIfFormFullFilled,
+      setEmailError: this.setEmailError
     };
   };
 
@@ -34,6 +36,12 @@ class AppProvider extends Component {
     website !== '' && 
     address !== '' ? true : false;
   }
+
+  setEmailError = (value) => {
+    this.setState({
+      emailError: value
+    })
+  } 
 
   render() {
     const { children } = this.props; 

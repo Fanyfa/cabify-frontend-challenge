@@ -38,10 +38,26 @@ input:-webkit-autofill {
         cursor: not-allowed;
       }
     }
+
+    &.error {
+      border-color: #FC5959;
+      .input .warning {
+        display: block;
+      }
+    }
     
     .input {
       flex: 1 1 100%;
       position: relative;
+
+      .warning {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+      }
       
       label {
         color: $color-positive-light;

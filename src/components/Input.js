@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import { withAppContext } from '../providers/App';
+import warning from '../images/warning.svg';
 
 class Input extends Component {
   constructor(props) {
@@ -35,13 +36,14 @@ class Input extends Component {
   }
 
   getClassName = () => {
-    const { className, isDisabled } = this.props;
+    const { className, isDisabled, isError } = this.props;
     const { isActive, isFocus } = this.state;
     return `formField-input col 
       ${className} 
       ${isActive ? 'active' : ''}
       ${isDisabled ? 'disabled active' : ''}
-      ${isFocus ? 'focus' : ''}`;
+      ${isFocus ? 'focus' : ''}
+      ${isError ? 'error' : ''}`;
   }
 
   render() {
@@ -50,11 +52,12 @@ class Input extends Component {
       <div className={this.getClassName()}>
         <div className="input">
           <input type={type} name={name} value={value} 
-          onChange={this.handleOnChange}
-          onFocus={this.handleOnFocus}
-          onBlur={this.handleOnBlur}
+            onChange={this.handleOnChange}
+            onFocus={this.handleOnFocus}
+            onBlur={this.handleOnBlur}
           />
           <label htmlFor={name}>{label}</label>
+          <img className="warning" src={warning}/>
         </div>
       </div>
     );
