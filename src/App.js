@@ -1,9 +1,29 @@
 import React, { Component } from 'react';
 import cabifyLogo from './images/cabify-logo.svg';
 import './styles/App.css';
+import Select from './components/Select';
+import Input from './components/Input';
+import prefixes from './data/Prefixes';
+import BusinessCard from './components/BusinessCard';
+import { withAppContext } from './providers/App'
+import { sendFormData } from './services/formapi';
+import { isEmailValid } from './utils/form';
 
 class App extends Component {
+
+  handleOnSubmit = (event) => {
+    event.preventDefault();
+    const { fullname, jobdescription, prefix, phonenumber, email, website, address, setEmailError } = this.props.context;
+    if (isEmailValid(email)) {
+      sendFormData({ fullname, jobdescription, prefix, phonenumber, email, website, address });
+      setEmailError(false);
+    } else {
+      setEmailError(true);
+    }
+  }
+
   render() {
+    const { context } = this.props;
     return (
       <div className="mainWrapper row">
         <article className="businessCard col col6">
@@ -15,76 +35,74 @@ class App extends Component {
           <h1 className="title-main">Request your business card</h1>
           <div className="businessCard-cards">
             <div className="businessCard-cardBack" />
-            <div className="businessCard-cardFront">
-              <div>
-                <p className="businessCard-cardFront-title">Laura Sánchez</p>
-                <p className="businessCard-cardFront-subtitle">Fronte</p>
-              </div>
-              <div className="businessCard-cardFront-bottom">
-                <p className="businessCard-icon-phone">+34 </p>
-                <p className="businessCard-icon-email"></p>
-                <p className="businessCard-icon-website">www.cabify.com</p>
-                <p className="businessCard-icon-address">Calle Pradillo 42. CP: 28002. Madrid</p>
-              </div>
-            </div>
+            <BusinessCard />
           </div>
         </article>
         <article className="builder col col6">
           <form className="form" action="">
             <div className="row">
-              <div className="formField-input active col col12">
-                <div className="input">
-                  <input type="text" name="fullname" value="Laura Sánchez" />
-                  <label htmlFor="fullname">Full name</label>
-                </div>
-              </div>
+              <Input 
+                className="col12"
+                type="text" 
+                name="fullname" 
+                label="Full name"
+              />
             </div>
             <div className="row row-separationMedium">
-              {/* you probably need to add active/focus/disabled classNames */}
-              <div className="formField-input active focus col col12">
-                <div className="input">
-                  <input type="text" name="jobdescription" value="Fronte" />
-                  <label htmlFor="jobdescription">Job description</label>
-                </div>
-              </div>
+              <Input 
+                className="col12"
+                type="text" 
+                name="jobdescription" 
+                label="Job description"
+              />
             </div>
             <div className="row row-separationMedium row-gutterMedium">
-              <div className="col col3">
-                {/* select field will be placed here */}
-              </div>
-              <div className="formField-input col col9">
-                <div className="input">
-                  <input type="tel" name="ponenumber" />
-                  <label htmlFor="ponenumber">Phone number</label>
-                </div>
-              </div>
+              <Select 
+                className="col3"
+                data={prefixes}
+                name="prefix"
+                label="Prefix"
+              />
+              <Input 
+                className="col9"
+                type="tel" 
+                name="phonenumber" 
+                label="Phone number"
+              />
             </div>
             <div className="row row-separationMedium">
-              <div className="formField-input col col12">
-                <div className="input">
-                  <input type="email" name="email" />
-                  <label htmlFor="email">Email</label>
-                </div>
-              </div>
+              <Input 
+                className="col12"
+                type="email" 
+                name="email" 
+                label="Email"
+                isError={context.emailError}
+              />
             </div>
             <div className="row row-separationMedium">
-              <div className="formField-input active disabled col col12">
-                <div className="input">
-                  <input type="text" name="website" value="www.cabify.com" />
-                  <label htmlFor="website">Website</label>
-                </div>
-              </div>
+              <Input 
+                className="col12"
+                type="text" 
+                name="website" 
+                label="Website"
+                value="www.cabify.com"
+                isDisabled={true}
+              />
             </div>
             <div className="row row-separationMedium">
-              <div className="formField-input active col col12">
-                <div className="input">
-                  <input type="text" name="address" value="Calle Pradillo 42. CP: 28002. Madrid" />
-                  <label htmlFor="address">Address</label>
-                </div>
-              </div>
+              <Input 
+                className="col12"
+                type="text" 
+                name="address" 
+                label="Address"
+              />
             </div>
             <div className="row row-separationHuge">
-              <input className="button button-full button-primary disabled" type="submit" value="Request" />
+              <input className={`button button-full button-primary ${context.getIfFormFullFilled() === false ? 'disabled' : ''}`} 
+                type="submit" 
+                value="Request"
+                onClick={this.handleOnSubmit}
+              />
             </div>
           </form>
         </article>
@@ -93,4 +111,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withAppContext(App);
